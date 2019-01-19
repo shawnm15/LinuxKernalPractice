@@ -15,8 +15,6 @@ int simple_init(void)
 	
 	for (; (task=next_task(task))!= &init_task; ){
 		printk(KERN_INFO "PID-%i,STATE-%lu,FLAGS-%i,PRIORITY-%i,PROCESS-%i,TGID-%i\n", task->pid,task->state,task->flags,task->rt_priority,task->policy,task->tgid);
-		
-		
 	}
 
     return 0;
