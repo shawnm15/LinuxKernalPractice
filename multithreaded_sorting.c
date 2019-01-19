@@ -11,15 +11,13 @@ void *sorting(void *param);
 void *merging(void *param);
 
 /*Parameter Data structure to pass in the from and to index.*/
-typedef struct
-{
+typedef struct {
 	int from_index;
 	int to_index;
 	
 } parameters;
 
-int main(int argc, const char *argv[])
-{
+int main(int argc, const char *argv[]) {
 	int i;
     
 	pthread_t workers[NUMThreads];
@@ -53,23 +51,19 @@ int main(int argc, const char *argv[])
  *
  */
 
-void *sorting(void *params)
-{
+void *sorting(void *params){
 	
 	parameters* pa = (parameters *)params;
 	int begin = pa->from_index;
 	int end = pa->to_index;
 	
-
 	int a, temp, b;
-   	for (a = begin+1; a < end; a++)
-   	{
+   	for (a = begin+1; a < end; a++){
        		temp = list[a];
        		b = a-1;
  
        
-       		while (b >= 0 && list[b] > temp)
-       		{
+       		while (b >= 0 && list[b] > temp){
            		list[b+1] = list[b];
            		b = b-1;
        		}
@@ -78,8 +72,7 @@ void *sorting(void *params)
 
 	
 	int c;
-	for(c=begin; c<end; c++)
-    	{
+	for(c=begin; c<end; c++){
             	answer[c] = list[c];
     	}
    	
@@ -89,8 +82,7 @@ void *sorting(void *params)
 }
 
 
-void *merging(void *params)
-{
+void *merging(void *params){
     parameters* p = (parameters *)params;
 
     int begin = p->from_index;
@@ -98,23 +90,18 @@ void *merging(void *params)
 
     int temp;
 	int i,j,d;
-	for( i=begin; i< SIZE; i++)
-	{
-		for( j=begin; j< SIZE-1; j++)
-		{
+	for( i=begin; i< SIZE; i++){
+		for( j=begin; j< SIZE-1; j++){
 
-			if(answer[j] > answer[j+1])
-			{
+			if(answer[j] > answer[j+1]){
 				temp= answer[j];
 				answer[j] = answer[j+1];
 				answer[j+1] = temp;
-
 			}
 		}
 	}
 
-	for( d=begin; d<SIZE; d++)
-	{
+	for( d=begin; d<SIZE; d++){
 		printf("%d  ", answer[d]);
 	}
 	printf("\n");
